@@ -2,10 +2,12 @@
 
 [ext_resource type="Script" uid="uid://tu22ndq6y3kj" path="res://Player/components/movement_component.gd" id="1_fyc2b"]
 [ext_resource type="Script" uid="uid://5lqomllk8s76" path="res://Player/components/jump_component.gd" id="2_o7nj4"]
-[ext_resource type="Script" path="res://Player/components/animation_component.gd" id="3_vvrkv"]
-[ext_resource type="Script" path="res://Player/state_machine/state_machine.gd" id="4_i1pdm"]
-[ext_resource type="Script" path="res://Player/states/ground_state.gd" id="5_q3pap"]
-[ext_resource type="Script" path="res://Player/states/air_state.gd" id="6_ld4ck"]
+[ext_resource type="Script" uid="uid://cr5oaosu1xgch" path="res://Player/components/animation_component.gd" id="3_vvrkv"]
+[ext_resource type="Script" uid="uid://fi4durp83cx0" path="res://Player/state_machine/state_machine.gd" id="4_i1pdm"]
+[ext_resource type="Script" uid="uid://dmt1nu8joover" path="res://Player/states/ground_state.gd" id="5_q3pap"]
+[ext_resource type="Script" uid="uid://hbuekeccgcl3" path="res://Player/states/air_state.gd" id="6_ld4ck"]
+[ext_resource type="Script" uid="uid://ouaare5exit0" path="res://Player/components/attack_component.gd" id="7_f0ksw"]
+[ext_resource type="Script" uid="uid://cnbmtnunehaew" path="res://Player/states/attack_state.gd" id="8_7kqv0"]
 
 [sub_resource type="PortableCompressedTexture2D" id="PortableCompressedTexture2D_4ntmi"]
 _data = PackedByteArray("AAADAAUAAAABAAAA8AAAAMAAAADgBAAAUklGRtgEAABXRUJQVlA4TMsEAAAv78AvECegkG0EaA73+ZOehkCAUOL/SwiFbCNA8zmE87f65j8A/zmmKAP1bHvzthVIawCCyADiywxgEGcANeX+Q0lO9dbl+fcV0X8HbttGktLO7L2aHLt/kH8whqaSOJBL4lnCs3gqRrGPXIyH93wzqiRRlWSH6BKeqqqcD0JZ0MXTCp5NayOh8yCjq6cVPNXV2Pybk3Ucpp6W8LRw43A1kqqqaQXPaOZD3pmHoq6WVvC01scQOg8k5ppW8FQHyDutj0rOu1ukFTxLA07PyfkYxdOG9ofIn/eUFFH2r430kWNj6jXQk8gCnsVdRucGbwgmVUhg0P5v9lTt+Z4d/Xp8j8yQn9FFJte47/UsGvHz894TPWMABBhZ1B5UP6i6Ng7Wcx/RAcJxABHxgBCaKOpUXSw8wkDVnfMUGR0YPRPXhQAAIbAWEZ2D/l8ARnQWo8pCI264gqm7sgCjU57PS6aw+UH0TMHWJV5IjM8J6TnIHpQ5AiUe9zbzw3suQXl+eATB/AtBemLUJAzH3IoKmX9NUpTylMLeJz1Pzf+RCE0lcSCXtDTFUzGKfeRii6NKElXXRq/g7oey7BBdwqdpbSR0HgRdPL3f550HVXOS0dXTCj7qairv9NmHnazgoxZuQvtwVFVNK/hEMx+3HPObDzd36mrpmHNulI/M7aA8uUPro8r92l59SMyvvB3n4nxEJuXJ+QMmzCoN4O4Ud4vX65qsz8F5MpEiCkE+tsuH4mlD++PluuZG+PCebOJkz8SwHx/uQt4Z6OkbhA/vSTCnav8a/R5Lqj0LFQqMb3c20kcOwvOeY+5VIx6jb7c/Mm4RyEqRn9Ff9gnnI7IxnnfMuY8eHdjzvGN3Uw+mETGyqD32fMwTwufbEDI+9zFGB4IqZNUrCPbainr+mldshM/LbcqTAB2ABdVAbidtu+fH/FVQPiLzDrf462dnGCdFuXlJRTXNW45fbsonyzHvPQF8UfkckYWOEul48/7MzP7E1+gUJclvhMpvbM6nBOO5Rc8l5N3B7w/SR44PZosmKSr/qxY7RN/vswbo4un9Pkswunp6t88f55hnfA47eZ/PJvuwtzMntz6rqv6YrE8SYu0vPnS/8ZtaH+pqP+acnE86Jun51n7bKyd5nJjrxaR80inAeXLXRfdbQ7WWmfXhbvHCpHxE5nYnWi4fEuM4HGoN1FjY0P7zhY3weYjICePDULQ2ZXHvxGk3HehJjuvE+Lwob4wPwUbn/xOBOoIhFBiX53XifEQ2wpPi+ZJ/jhEKBuRn9BeFE9JHDsaTYJaX/FMAVP9jZFF7Tc8xN8KH9qRoCtSWCRTQSrDXVtTzdwgf2pPhaAhEo/Jw3dF0j1vEL+6wPgfjSYELMP3Wog0P4uQGAFmuN26cj8ikPJmFQEVm2KuaKjPuDRg9X5+1UT4yt4PypCiKqsIgyMJF9FxiCR+ZwMYhLJqk6B/wIddLrf43OY55xt/1BkCv/ZRaGW3QxIKl2dEQoNKgri2vDAIBbPeUsF6jrky9qAyq0aPOhe/XBih1XaUpoF8LH8pA10ShBmBlnkO7Pw6mza87S1PCzRJD9IbF0do0CcEwU9i2MqbeMzXX1ddncOzVG6osjQzQSi3LyqGCzPI3+IP8jf0v9BAA")
@@ -15,8 +17,7 @@ size_override = Vector2(240, 192)
 size = Vector2(15, 16)
 
 [sub_resource type="Animation" id="Animation_btcbx"]
-length = 0.3
-loop_mode = 1
+length = 0.26666668
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -29,10 +30,35 @@ tracks/0/keys = {
 "update": 1,
 "values": [7, 8, 9, 0]
 }
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.033333335, 0.23333333, 0.265, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"values": [{
+"args": [],
+"method": &"enable_hitbox"
+}, {
+"args": [],
+"method": &"open_combo_window"
+}, {
+"args": [],
+"method": &"disable_hitbox"
+}, {
+"args": [],
+"method": &"close_combo_window"
+}, {
+"args": [],
+"method": &"finish_attack"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_gwnis"]
-length = 0.3
-loop_mode = 1
+length = 0.26666668
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -44,6 +70,26 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [10, 11, 12, 0]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AttackComponent")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23333333, 0.26666668),
+"transitions": PackedFloat32Array(1, 1, 1),
+"values": [{
+"args": [],
+"method": &"enable_hitbox"
+}, {
+"args": [],
+"method": &"disable_hitbox"
+}, {
+"args": [],
+"method": &"finish_attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_k53q1"]
@@ -154,14 +200,17 @@ _data = {
 &"up": SubResource("Animation_x3vf3")
 }
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
+size = Vector2(16, 14)
+
 [node name="Player" type="CharacterBody2D" unique_id=1624974940]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1287096888]
-texture_filter = 1
 position = Vector2(0, -8)
 texture = SubResource("PortableCompressedTexture2D_4ntmi")
 hframes = 5
 vframes = 4
+frame = 7
 metadata/_aseprite_wizard_interface_config_ = {
 "animation_section": false,
 "layer_section": false,
@@ -196,14 +245,24 @@ shape = SubResource("RectangleShape2D_hvfyp")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=490998562]
 libraries/ = SubResource("AnimationLibrary_apopc")
 
-[node name="JumpComponent" type="Node" parent="." unique_id=300966056]
-script = ExtResource("2_o7nj4")
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=1912359720]
+position = Vector2(13, -8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=244724464]
+shape = SubResource("RectangleShape2D_attack")
+disabled = true
 
 [node name="MovementComponent" type="Node" parent="." unique_id=1646415028]
 script = ExtResource("1_fyc2b")
 
+[node name="JumpComponent" type="Node" parent="." unique_id=300966056]
+script = ExtResource("2_o7nj4")
+
 [node name="AnimationComponent" type="Node" parent="." unique_id=1511463340]
 script = ExtResource("3_vvrkv")
+
+[node name="AttackComponent" type="Node" parent="." unique_id=768601747]
+script = ExtResource("7_f0ksw")
 
 [node name="StateMachine" type="Node" parent="." unique_id=283719538]
 script = ExtResource("4_i1pdm")
@@ -214,3 +273,6 @@ script = ExtResource("5_q3pap")
 
 [node name="Air" type="Node" parent="StateMachine" unique_id=331286706]
 script = ExtResource("6_ld4ck")
+
+[node name="Attack" type="Node" parent="StateMachine" unique_id=64863739]
+script = ExtResource("8_7kqv0")

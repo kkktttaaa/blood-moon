@@ -14,6 +14,7 @@ class_name JumpComponent
 
 var coyote_timer := 0.0
 var buffer_timer := 0.0
+var jumped_this_frame := false
 
 
 func _ready() -> void:
@@ -22,6 +23,8 @@ func _ready() -> void:
 
 
 func physics_step(delta: float) -> void:
+	jumped_this_frame = false
+
 	if body == null:
 		return
 
@@ -50,3 +53,4 @@ func jump() -> void:
 	body.velocity.y = jump_velocity
 	coyote_timer = 0.0
 	buffer_timer = 0.0
+	jumped_this_frame = true

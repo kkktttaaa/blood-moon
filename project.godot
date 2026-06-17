@@ -61,5 +61,6 @@ attack={
 
 [rendering]
 
+textures/canvas_textures/default_texture_filter=0
 rendering_device/driver.windows="d3d12"
 environment/defaults/default_clear_color=Color(0.10980392, 0.08627451, 0.14901961, 1)

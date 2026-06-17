@@ -30,17 +30,23 @@ func get_input_direction() -> float:
 	return Input.get_axis(left_action, right_action)
 
 
-func physics_step(delta: float, direction: float) -> void:
+func physics_step(
+	delta: float,
+	direction: float,
+	speed_multiplier := 1.0,
+	gravity_multiplier := 1.0,
+	max_fall_speed_multiplier := 1.0
+) -> void:
 	if body == null:
 		return
 
-	apply_horizontal(delta, direction)
-	apply_gravity(delta)
+	apply_horizontal(delta, direction, speed_multiplier)
+	apply_gravity(delta, gravity_multiplier, max_fall_speed_multiplier)
 	body.move_and_slide()
 
 
-func apply_horizontal(delta: float, direction: float) -> void:
-	var target_speed := direction * max_speed
+func apply_horizontal(delta: float, direction: float, speed_multiplier := 1.0) -> void:
+	var target_speed := direction * max_speed * speed_multiplier
 	var rate := acceleration if direction != 0.0 else deceleration
 
 	if direction != 0.0 and not is_zero_approx(body.velocity.x) and signf(body.velocity.x) != signf(direction):
@@ -49,9 +55,10 @@ func apply_horizontal(delta: float, direction: float) -> void:
 	body.velocity.x = move_toward(body.velocity.x, target_speed, rate * delta)
 
 
-func apply_gravity(delta: float) -> void:
+func apply_gravity(delta: float, gravity_multiplier := 1.0, max_fall_speed_multiplier := 1.0) -> void:
 	if body.is_on_floor() and body.velocity.y > 0.0:
 		body.velocity.y = 0.0
 		return
 
-	body.velocity.y = minf(body.velocity.y + gravity * delta, max_fall_speed)
+	var fall_speed := max_fall_speed * max_fall_speed_multiplier
+	body.velocity.y = minf(body.velocity.y + gravity * gravity_multiplier * delta, fall_speed)
