@@ -19,14 +19,12 @@ var buffer_timer := 0.0
 func _ready() -> void:
 	if body == null:
 		push_error("%s must be a child of CharacterBody2D." % name)
-		set_physics_process(false)
-
-
-func _physics_process(delta: float) -> void:
-	physics_step(delta)
 
 
 func physics_step(delta: float) -> void:
+	if body == null:
+		return
+
 	update_timers(delta)
 
 	if Input.is_action_just_pressed(jump_action):

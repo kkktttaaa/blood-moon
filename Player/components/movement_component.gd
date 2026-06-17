@@ -21,14 +21,19 @@ class_name MovementComponent
 func _ready() -> void:
 	if body == null:
 		push_error("%s must be a child of CharacterBody2D." % name)
-		set_physics_process(false)
 
 
-func _physics_process(delta: float) -> void:
-	physics_step(delta, Input.get_axis(left_action, right_action))
+func get_input_direction() -> float:
+	if body == null:
+		return 0.0
+
+	return Input.get_axis(left_action, right_action)
 
 
 func physics_step(delta: float, direction: float) -> void:
+	if body == null:
+		return
+
 	apply_horizontal(delta, direction)
 	apply_gravity(delta)
 	body.move_and_slide()
