@@ -20,6 +20,11 @@ func physics_update(delta: float) -> void:
 	if not has_components:
 		return
 
+	spin.physics_step()
+
+	if spin.requested_this_frame:
+		spin.start()
+
 	movement.physics_step(
 		delta,
 		movement.get_input_direction(),

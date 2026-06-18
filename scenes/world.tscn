@@ -2,12 +2,22 @@
 
 [ext_resource type="PackedScene" uid="uid://cqijc70pbijh1" path="res://Player/player.tscn" id="1_sot36"]
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_nnsk1"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nnsk1"]
 
 [node name="world" type="Node2D" unique_id=1958504923]
 
 [node name="Player" parent="." unique_id=1716926640 instance=ExtResource("1_sot36")]
 position = Vector2(192, 108)
+
+[node name="Enemy" type="CharacterBody2D" parent="." unique_id=1823555828 groups=["spin_target"]]
+position = Vector2(82, 119)
+collision_layer = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=52339174]
+shape = SubResource("CircleShape2D_nnsk1")
+debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1756187157]
 position = Vector2(192, 108)

@@ -21,36 +21,41 @@ class_name SpinComponent
 var is_available := false
 var is_spinning := false
 var requested_this_frame := false
-var near_spin_target_count := 0
 
 
 func _ready() -> void:
 	if body == null or animation == null:
 		push_error("%s needs CharacterBody2D and AnimationComponent." % name)
-		return
 
 	if detection_area == null:
 		push_error("%s is missing detection Area2D." % name)
-		return
-
-	detection_area.area_entered.connect(_on_detection_entered)
-	detection_area.area_exited.connect(_on_detection_exited)
-	detection_area.body_entered.connect(_on_detection_entered)
-	detection_area.body_exited.connect(_on_detection_exited)
-
-
-func _on_detection_entered(node: Node2D) -> void:
-	if node.is_in_group(&"spin_target"):
-		near_spin_target_count += 1
-
-
-func _on_detection_exited(node: Node2D) -> void:
-	if node.is_in_group(&"spin_target"):
-		near_spin_target_count = maxi(0, near_spin_target_count - 1)
 
 
 func _can_trigger_spin() -> bool:
-	return is_available or near_spin_target_count > 0
+	if is_available:
+		return true
+
+	if detection_area == null:
+		return false
+
+	for area in detection_area.get_overlapping_areas():
+		if _is_spin_target(area):
+			return true
+
+	for target_body in detection_area.get_overlapping_bodies():
+		if _is_spin_target(target_body):
+			return true
+
+	return false
+
+
+func _is_spin_target(node: Node) -> bool:
+	while node != null and node != get_tree().root:
+		if node.is_in_group(&"spin_target"):
+			return true
+		node = node.get_parent()
+
+	return false
 
 
 func physics_step() -> void:
@@ -77,6 +82,9 @@ func reset() -> void:
 
 
 func start() -> void:
+	if body == null or animation == null:
+		return
+
 	is_available = false
 	is_spinning = true
 	body.velocity.y = spin_velocity
@@ -85,4 +93,5 @@ func start() -> void:
 
 func finish() -> void:
 	is_spinning = false
-	animation.clear_animation_override()
+	if animation != null:
+		animation.clear_animation_override()
