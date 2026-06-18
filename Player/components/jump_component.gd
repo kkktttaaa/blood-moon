@@ -49,6 +49,10 @@ func can_jump() -> bool:
 	return coyote_timer > 0.0 and buffer_timer > 0.0
 
 
+func cancel_buffer() -> void:
+	buffer_timer = 0.0
+
+
 func jump() -> void:
 	body.velocity.y = jump_velocity
 	coyote_timer = 0.0

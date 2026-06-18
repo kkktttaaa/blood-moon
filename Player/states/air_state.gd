@@ -17,6 +17,7 @@ func get_next_state() -> StringName:
 		return &"Attack"
 
 	if spin.requested_this_frame:
+		jump.cancel_buffer()
 		return &"Spin"
 
 	return &"Ground" if actor.is_on_floor() else &""
