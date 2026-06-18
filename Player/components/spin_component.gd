@@ -12,7 +12,7 @@ class_name SpinComponent
 
 @export_group("References")
 @export var animation_path: NodePath = ^"../AnimationComponent"
-@export var detection_area_path: NodePath
+@export var detection_area_path: NodePath = ^"../SpinDetectionArea"
 
 @onready var body := get_parent() as CharacterBody2D
 @onready var animation := get_node_or_null(animation_path) as AnimationComponent
