@@ -27,10 +27,12 @@ func setup() -> void:
 		push_error("%s is missing a player component." % name)
 
 
-func update_player(delta: float) -> void:
+func update_player(delta: float, can_jump := true) -> void:
 	if not has_components:
 		return
 
-	jump.physics_step(delta)
+	if can_jump:
+		jump.physics_step(delta)
+
 	movement.physics_step(delta, movement.get_input_direction())
 	animation.physics_step()

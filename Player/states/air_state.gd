@@ -3,21 +3,24 @@ class_name AirState
 
 
 func physics_update(delta: float) -> void:
-	if has_components:
-		spin.physics_step()
+	if not has_components:
+		return
 
-	update_player(delta)
+	spin.physics_step()
+	if spin.requested_this_frame:
+		jump.cancel_buffer()
+
+	update_player(delta, not spin.requested_this_frame)
 
 
 func get_next_state() -> StringName:
 	if not has_components:
 		return &""
 
+	if spin.requested_this_frame:
+		return &"Spin"
+
 	if attack.wants_attack():
 		return &"Attack"
-
-	if spin.requested_this_frame:
-		jump.cancel_buffer()
-		return &"Spin"
 
 	return &"Ground" if actor.is_on_floor() else &""

@@ -258,7 +258,9 @@ shape = SubResource("RectangleShape2D_attack")
 disabled = true
 
 [node name="SpinDetectionArea" type="Area2D" parent="." unique_id=192837465]
+collision_layer = 0
 collision_mask = 8
+monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="SpinDetectionArea" unique_id=192837466]
 position = Vector2(0, -8)

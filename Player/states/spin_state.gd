@@ -23,7 +23,6 @@ func physics_update(delta: float) -> void:
 	spin.physics_step()
 
 	if spin.requested_this_frame:
-		spin.finish()
 		spin.start()
 
 	movement.physics_step(
