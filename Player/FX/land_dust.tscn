@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://c00urtidsurox"]
+
+[ext_resource type="Texture2D" uid="uid://dnqy4wt80txcp" path="res://Player/art/FX.png" id="1_khyow"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5qp8u"]
+atlas = ExtResource("1_khyow")
+region = Rect2(0, 16, 32, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_svyxy"]
+atlas = ExtResource("1_khyow")
+region = Rect2(32, 16, 32, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_mf4rv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5qp8u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_svyxy")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="LandDust" type="AnimatedSprite2D" unique_id=678875864]
+visible = false
+scale = Vector2(1, 0.7)
+sprite_frames = SubResource("SpriteFrames_mf4rv")
+frame = 1
+frame_progress = 1.0

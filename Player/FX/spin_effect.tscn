@@ -1,0 +1,28 @@
+[gd_scene format=3 uid="uid://cu1mnbwjm08x8"]
+
+[ext_resource type="Texture2D" uid="uid://dnqy4wt80txcp" path="res://Player/art/FX.png" id="1_4h26o"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bhudk"]
+atlas = ExtResource("1_4h26o")
+region = Rect2(0, 32, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wxlio"]
+atlas = ExtResource("1_4h26o")
+region = Rect2(16, 32, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ip1vl"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bhudk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wxlio")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="SpinEffect" type="AnimatedSprite2D" unique_id=1056945475]
+sprite_frames = SubResource("SpriteFrames_ip1vl")

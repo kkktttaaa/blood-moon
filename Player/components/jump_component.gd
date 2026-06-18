@@ -1,6 +1,8 @@
 extends Node
 class_name JumpComponent
 
+signal jumped
+
 @export_group("Input")
 @export var jump_action := "jump"
 
@@ -58,3 +60,4 @@ func jump() -> void:
 	coyote_timer = 0.0
 	buffer_timer = 0.0
 	jumped_this_frame = true
+	jumped.emit()
