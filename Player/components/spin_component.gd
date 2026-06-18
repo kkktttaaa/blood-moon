@@ -9,13 +9,14 @@ class_name SpinComponent
 @export var gravity_multiplier := 0.75
 @export var max_fall_speed_multiplier := 0.75
 @export var animation_name: StringName = &"spin"
-@export var detection_radius := 48.0
 
 @export_group("References")
 @export var animation_path: NodePath = ^"../AnimationComponent"
+@export var detection_area_path: NodePath
 
 @onready var body := get_parent() as CharacterBody2D
 @onready var animation := get_node_or_null(animation_path) as AnimationComponent
+@onready var detection_area := get_node_or_null(detection_area_path) as Area2D
 
 var is_available := false
 var is_spinning := false
@@ -28,28 +29,14 @@ func _ready() -> void:
 		push_error("%s needs CharacterBody2D and AnimationComponent." % name)
 		return
 
-	_setup_detection_area()
+	if detection_area == null:
+		push_error("%s is missing detection Area2D." % name)
+		return
 
-
-func _setup_detection_area() -> void:
-	var area := Area2D.new()
-	area.name = "SpinDetectionArea"
-	area.collision_layer = 0
-	area.collision_mask = 1 << 3
-
-	var shape := CircleShape2D.new()
-	shape.radius = detection_radius
-	var collision := CollisionShape2D.new()
-	collision.shape = shape
-	collision.debug_color = Color.SKY_BLUE
-	area.add_child(collision)
-
-	area.area_entered.connect(_on_detection_entered)
-	area.area_exited.connect(_on_detection_exited)
-	area.body_entered.connect(_on_detection_entered)
-	area.body_exited.connect(_on_detection_exited)
-
-	body.add_child(area)
+	detection_area.area_entered.connect(_on_detection_entered)
+	detection_area.area_exited.connect(_on_detection_exited)
+	detection_area.body_entered.connect(_on_detection_entered)
+	detection_area.body_exited.connect(_on_detection_exited)
 
 
 func _on_detection_entered(node: Node2D) -> void:

@@ -205,6 +205,9 @@ _data = {
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_attack"]
 size = Vector2(16, 14)
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_spin_detect"]
+radius = 48.0
+
 [node name="Player" type="CharacterBody2D" unique_id=1624974940]
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1287096888]
@@ -254,6 +257,13 @@ position = Vector2(13, -8)
 shape = SubResource("RectangleShape2D_attack")
 disabled = true
 
+[node name="SpinDetectionArea" type="Area2D" parent="." unique_id=192837465]
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SpinDetectionArea" unique_id=192837466]
+shape = SubResource("CircleShape2D_spin_detect")
+debug_color = Color(0.529412, 0.807843, 0.980392, 1)
+
 [node name="MovementComponent" type="Node" parent="." unique_id=1646415028]
 script = ExtResource("1_fyc2b")
 
@@ -268,6 +278,7 @@ script = ExtResource("7_f0ksw")
 
 [node name="SpinComponent" type="Node" parent="." unique_id=839403744]
 script = ExtResource("9_b2owq")
+detection_area_path = NodePath("SpinDetectionArea")
 
 [node name="StateMachine" type="Node" parent="." unique_id=283719538]
 script = ExtResource("4_i1pdm")
