@@ -6,6 +6,7 @@ class_name DashSlashVFXComponent
 @export var trail_lifetime := 0.14
 @export var trail_color := Color("ff2961ff")
 @export var trail_center_offset := Vector2(0.0, -8.0)
+@export_range(3, 48, 1) var trail_steps := 25
 
 @export_group("Speed Lines")
 @export var line_spacing := 18.0
@@ -101,14 +102,38 @@ func _update_trail() -> void:
 	var direction := dash_slash.direction
 	var perpendicular := direction.orthogonal()
 	var current := (body.global_position + trail_center_offset).round()
-	var middle := ((trail_start + current) * 0.5).round()
-	var half_width := trail_width * 0.5
-	trail.polygon = PackedVector2Array([
-		parent.to_local(trail_start).round(),
-		parent.to_local(middle + perpendicular * half_width).round(),
-		parent.to_local(current).round(),
-		parent.to_local(middle - perpendicular * half_width).round(),
-	])
+	trail.polygon = _build_pixel_trail(
+		parent,
+		trail_start,
+		current,
+		perpendicular
+	)
+
+
+func _build_pixel_trail(
+	parent: Node2D,
+	start: Vector2,
+	end: Vector2,
+	perpendicular: Vector2
+) -> PackedVector2Array:
+	var upper := PackedVector2Array()
+	var lower := PackedVector2Array()
+
+	for index in range(trail_steps + 1):
+		var progress := float(index) / trail_steps
+		var point := start.lerp(end, progress)
+		var width := sin(progress * PI) * trail_width * 0.5
+		var next_progress := float(index + 1) / trail_steps
+		var segment_end := start.lerp(end, minf(next_progress, 1.0))
+
+		upper.append(parent.to_local(point + perpendicular * width).round())
+		upper.append(parent.to_local(segment_end + perpendicular * width).round())
+		lower.append(parent.to_local(point - perpendicular * width).round())
+		lower.append(parent.to_local(segment_end - perpendicular * width).round())
+
+	lower.reverse()
+	upper.append_array(lower)
+	return upper
 
 
 func _spawn_speed_line() -> void:
