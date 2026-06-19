@@ -16,6 +16,10 @@ config/features=PackedStringArray("4.6", "Forward Plus")
 boot_splash/bg_color=Color(0.10980392, 0.08627451, 0.14901961, 1)
 config/icon="res://icon.svg"
 
+[autoload]
+
+CombatFeedback="*res://Game/combat_feedback.gd"
+
 [display]
 
 window/size/viewport_width=320

@@ -2,6 +2,8 @@ extends Node
 class_name DashSlashComponent
 
 signal hit(target: Node, damage: int, direction: Vector2)
+signal dash_started(direction: Vector2)
+signal dash_finished
 
 enum Phase {
 	IDLE,
@@ -28,7 +30,7 @@ enum Phase {
 @export_group("Dash")
 @export var dash_speed := 420.0
 @export var dash_distance := 60.0
-@export var exit_speed := 150.0
+@export var exit_speed := 200.0
 @export var damage := 2
 @export var hitbox_offset := 13.0
 @export var animation_name: StringName = &"dash_slash"
@@ -156,6 +158,7 @@ func _start_dash() -> void:
 	_enable_hitbox()
 	if is_instance_valid(effect):
 		effect.modulate.a = 1.0
+	dash_started.emit(direction)
 
 
 func _dash(delta: float) -> void:
@@ -168,6 +171,7 @@ func _dash(delta: float) -> void:
 		_disable_hitbox()
 		_clear_effect()
 		body.velocity = direction * exit_speed
+		dash_finished.emit()
 
 
 func _enable_hitbox() -> void:
