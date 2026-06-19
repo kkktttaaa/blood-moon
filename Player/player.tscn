@@ -292,6 +292,7 @@ libraries/ = SubResource("AnimationLibrary_apopc")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=834918584]
 position = Vector2(0, -8)
+enabled = false
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1912359720]
 position = Vector2(13, -8)
@@ -326,6 +327,7 @@ script = ExtResource("1_fyc2b")
 
 [node name="JumpComponent" type="Node" parent="." unique_id=300966056]
 script = ExtResource("2_o7nj4")
+jump_velocity = -310.0
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=1511463340]
 script = ExtResource("3_vvrkv")
@@ -335,8 +337,6 @@ script = ExtResource("7_f0ksw")
 
 [node name="SpinComponent" type="Node" parent="." unique_id=839403744]
 script = ExtResource("9_b2owq")
-gravity_multiplier = 0.8
-max_fall_speed_multiplier = 0.8
 
 [node name="DashSlashComponent" type="Node" parent="." unique_id=1688151417]
 script = ExtResource("15_dash_component")

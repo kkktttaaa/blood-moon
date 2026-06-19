@@ -52,8 +52,10 @@ func get_next_state() -> StringName:
 
 
 func get_gravity_multiplier() -> float:
-	return 1.0 if actor.is_on_floor() else air_gravity_multiplier
+	var multiplier := 1.0 if actor.is_on_floor() else air_gravity_multiplier
+	return jump.get_gravity_multiplier(multiplier)
 
 
 func get_max_fall_speed_multiplier() -> float:
-	return 1.0 if actor.is_on_floor() else air_max_fall_speed_multiplier
+	var multiplier := 1.0 if actor.is_on_floor() else air_max_fall_speed_multiplier
+	return jump.get_fall_speed_multiplier(multiplier)

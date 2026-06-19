@@ -29,8 +29,8 @@ func physics_update(delta: float) -> void:
 		delta,
 		movement.get_input_direction(),
 		1.0,
-		spin.gravity_multiplier,
-		spin.max_fall_speed_multiplier
+		jump.get_gravity_multiplier(spin.gravity_multiplier),
+		jump.get_fall_speed_multiplier(spin.max_fall_speed_multiplier)
 	)
 	animation.physics_step()
 
