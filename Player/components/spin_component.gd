@@ -1,6 +1,8 @@
 extends Node
 class_name SpinComponent
 
+signal started
+
 @export_group("Input")
 @export var spin_action := "jump"
 
@@ -89,6 +91,7 @@ func start() -> void:
 	is_spinning = true
 	body.velocity.y = spin_velocity
 	animation.set_animation_override(animation_name)
+	started.emit()
 
 
 func finish() -> void:

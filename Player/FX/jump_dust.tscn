@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dgmn74bexkhn5"]
+
+[ext_resource type="Texture2D" uid="uid://dnqy4wt80txcp" path="res://Player/art/FX.png" id="1_dkbyw"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_onvk4"]
+atlas = ExtResource("1_dkbyw")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mvu1h"]
+atlas = ExtResource("1_dkbyw")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_x5yrg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_onvk4")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mvu1h")
+}],
+"loop": false,
+"name": &"default",
+"speed": 10.0
+}]
+
+[node name="JumpDust" type="AnimatedSprite2D" unique_id=558004132]
+scale = Vector2(0.7, 1)
+sprite_frames = SubResource("SpriteFrames_x5yrg")
+frame = 1
+frame_progress = 1.0

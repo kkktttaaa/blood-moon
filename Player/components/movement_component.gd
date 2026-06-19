@@ -1,6 +1,8 @@
 extends Node
 class_name MovementComponent
 
+signal landed
+
 @export_group("Input")
 @export var left_action := "move_left"
 @export var right_action := "move_right"
@@ -16,6 +18,9 @@ class_name MovementComponent
 @export var max_fall_speed := 240.0
 
 @onready var body := get_parent() as CharacterBody2D
+
+var floor_state_initialized := false
+var was_on_floor := false
 
 
 func _ready() -> void:
@@ -43,6 +48,16 @@ func physics_step(
 	apply_horizontal(delta, direction, speed_multiplier)
 	apply_gravity(delta, gravity_multiplier, max_fall_speed_multiplier)
 	body.move_and_slide()
+	update_floor_state()
+
+
+func update_floor_state() -> void:
+	var is_on_floor := body.is_on_floor()
+	if floor_state_initialized and not was_on_floor and is_on_floor:
+		landed.emit()
+
+	was_on_floor = is_on_floor
+	floor_state_initialized = true
 
 
 func apply_horizontal(delta: float, direction: float, speed_multiplier := 1.0) -> void:

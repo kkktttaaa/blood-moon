@@ -36,6 +36,9 @@ func physics_update(delta: float) -> void:
 
 
 func get_next_state() -> StringName:
+	if attack.wants_attack():
+		return &"DashSlash"
+
 	if actor.is_on_floor():
 		return &"Ground"
 

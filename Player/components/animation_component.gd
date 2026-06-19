@@ -34,8 +34,10 @@ func physics_step() -> void:
 	play(animation_override if animation_override != &"" else get_locomotion_animation())
 
 
-func set_animation_override(animation: StringName) -> void:
+func set_animation_override(animation: StringName, restart := false) -> void:
 	animation_override = animation
+	if restart and animation_player != null and animation_player.has_animation(animation):
+		animation_player.play(animation)
 
 
 func clear_animation_override() -> void:
