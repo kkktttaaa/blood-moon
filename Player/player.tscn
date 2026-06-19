@@ -22,6 +22,21 @@ size_override = Vector2(240, 192)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hvfyp"]
 size = Vector2(15, 16)
 
+[sub_resource type="Animation" id="Animation_gu6f8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_btcbx"]
 length = 0.26666668
 tracks/0/type = "value"
@@ -96,6 +111,22 @@ tracks/1/keys = {
 "args": [],
 "method": &"finish_attack"
 }]
+}
+
+[sub_resource type="Animation" id="Animation_dkpta"]
+resource_name = "dash_slash"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
 }
 
 [sub_resource type="Animation" id="Animation_k53q1"]
@@ -196,8 +227,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_apopc"]
 _data = {
+&"RESET": SubResource("Animation_gu6f8"),
 &"attack_1": SubResource("Animation_btcbx"),
 &"attack_2": SubResource("Animation_gwnis"),
+&"dash_slash": SubResource("Animation_dkpta"),
 &"down": SubResource("Animation_k53q1"),
 &"idle": SubResource("Animation_fhl08"),
 &"run": SubResource("Animation_vtle1"),
