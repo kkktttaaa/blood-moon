@@ -327,7 +327,7 @@ script = ExtResource("1_fyc2b")
 
 [node name="JumpComponent" type="Node" parent="." unique_id=300966056]
 script = ExtResource("2_o7nj4")
-jump_velocity = -310.0
+max_jump_count = 2
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=1511463340]
 script = ExtResource("3_vvrkv")

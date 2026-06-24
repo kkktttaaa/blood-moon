@@ -7,7 +7,7 @@ signal jumped
 @export var jump_action := "jump"
 
 @export_group("Jump")
-@export var jump_velocity := -300.0
+@export var jump_velocity := -310.0
 @export var jump_cut_multiplier := 0.45
 @export_range(1, 8, 1) var max_jump_count := 1
 @export var coyote_time := 0.15
