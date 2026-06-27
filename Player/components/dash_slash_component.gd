@@ -39,6 +39,7 @@ enum Phase {
 @export_group("Visual")
 @export var effect_center_offset := Vector2(0.0, -8.0)
 @export var effect_distance := 14.0
+@export_range(0.0, 1.0, 0.05) var aim_effect_alpha := 0.35
 
 @export_group("References")
 @export var movement_path: NodePath = ^"../MovementComponent"
@@ -94,6 +95,8 @@ func start_aiming() -> void:
 	Engine.time_scale = aim_time_scale
 	animation.set_animation_override(animation_name, true)
 	_spawn_effect(false)
+	if is_instance_valid(effect):
+		effect.modulate.a = aim_effect_alpha
 	update_visual_direction()
 
 
@@ -264,6 +267,7 @@ func _play_effect() -> void:
 
 	effect.frame = 0
 	effect.frame_progress = 0.0
+	effect.modulate.a = 1.0
 	effect.play()
 
 

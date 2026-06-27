@@ -297,7 +297,6 @@ libraries/ = SubResource("AnimationLibrary_apopc")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=834918584]
 position = Vector2(0, -8)
-enabled = false
 
 [node name="AttackHitbox" type="Area2D" parent="." unique_id=1912359720]
 position = Vector2(13, -8)
@@ -356,6 +355,7 @@ effect_scene = ExtResource("17_slash_effect")
 
 [node name="DashSlashVFXComponent" type="Node" parent="." unique_id=2012778453]
 script = ExtResource("18_dash_vfx")
+aim_afterimage_lifetime = 0.15
 
 [node name="PlayerVFXComponent" type="Node" parent="." unique_id=1213806109]
 script = ExtResource("11_vfx")
