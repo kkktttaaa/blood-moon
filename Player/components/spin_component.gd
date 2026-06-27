@@ -11,14 +11,17 @@ signal started
 @export var gravity_multiplier := 0.75
 @export var max_fall_speed_multiplier := 0.75
 @export var animation_name: StringName = &"spin"
+@export_range(0, 20, 1) var energy_reward := 1
 
 @export_group("References")
 @export var animation_path: NodePath = ^"../AnimationComponent"
 @export var detection_area_path: NodePath = ^"../SpinDetectionArea"
+@export var energy_path: NodePath = ^"../EnergyComponent"
 
 @onready var body := get_parent() as CharacterBody2D
 @onready var animation := get_node_or_null(animation_path) as AnimationComponent
 @onready var detection_area := get_node_or_null(detection_area_path) as Area2D
+@onready var energy := get_node_or_null(energy_path) as EnergyComponent
 
 var is_available := false
 var is_spinning := false
@@ -91,6 +94,8 @@ func start() -> void:
 	is_spinning = true
 	body.velocity.y = spin_velocity
 	animation.set_animation_override(animation_name)
+	if energy != null:
+		energy.restore(energy_reward)
 	started.emit()
 
 

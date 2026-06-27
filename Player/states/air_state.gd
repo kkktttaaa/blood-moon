@@ -20,6 +20,9 @@ func get_next_state() -> StringName:
 	if spin.requested_this_frame:
 		return &"Spin"
 
+	if dash_slash.wants_start() and dash_slash.can_start():
+		return &"DashSlash"
+
 	if attack.wants_attack():
 		return &"Attack"
 

@@ -16,13 +16,26 @@ position = Vector2(161, 108)
 position = Vector2(104, 104)
 collision_layer = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=52339174]
-shape = SubResource("RectangleShape2D_rwgxs")
-debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
-
 [node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1854444651]
 texture = ExtResource("2_rwgxs")
 region_enabled = true
 region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=52339174]
+shape = SubResource("RectangleShape2D_rwgxs")
+debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
+
+[node name="Enemy2" type="CharacterBody2D" parent="." unique_id=1642635149 groups=["spin_target"]]
+position = Vector2(223, 104)
+collision_layer = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="Enemy2" unique_id=863833198]
+texture = ExtResource("2_rwgxs")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2" unique_id=1280525855]
+shape = SubResource("RectangleShape2D_rwgxs")
+debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
 
 [node name="01" parent="." unique_id=1395167569 instance=ExtResource("3_4wyf3")]

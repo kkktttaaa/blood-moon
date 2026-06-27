@@ -25,4 +25,8 @@ func get_next_state() -> StringName:
 	if not has_components or not dash_slash.is_finished():
 		return &""
 
+	if dash_slash.wants_chain() and dash_slash.can_start():
+		dash_slash.start_aiming()
+		return &""
+
 	return &"Ground" if actor.is_on_floor() else &"Air"
