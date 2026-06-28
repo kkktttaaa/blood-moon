@@ -31,6 +31,7 @@ enum Phase {
 @export var dash_speed := 420.0
 @export var dash_distance := 60.0
 @export var exit_speed := 200.0
+@export_range(0, 20, 1) var energy_cost := 1
 @export var damage := 2
 @export var hitbox_offset := 13.0
 @export var animation_name: StringName = &"dash_slash"
@@ -38,9 +39,11 @@ enum Phase {
 @export_group("Visual")
 @export var effect_center_offset := Vector2(0.0, -8.0)
 @export var effect_distance := 14.0
+@export_range(0.0, 1.0, 0.05) var aim_effect_alpha := 0.35
 
 @export_group("References")
 @export var movement_path: NodePath = ^"../MovementComponent"
+@export var energy_path: NodePath = ^"../EnergyComponent"
 @export var animation_path: NodePath = ^"../AnimationComponent"
 @export var sprite_path: NodePath = ^"../Sprite2D"
 @export var hitbox_path: NodePath = ^"../AttackHitbox"
@@ -49,6 +52,7 @@ enum Phase {
 
 @onready var body := get_parent() as CharacterBody2D
 @onready var movement := get_node_or_null(movement_path) as MovementComponent
+@onready var energy := get_node_or_null(energy_path) as EnergyComponent
 @onready var animation := get_node_or_null(animation_path) as AnimationComponent
 @onready var sprite := get_node_or_null(sprite_path) as Sprite2D
 @onready var hitbox := get_node_or_null(hitbox_path) as Area2D
@@ -60,10 +64,11 @@ var distance_traveled := 0.0
 var previous_time_scale := 1.0
 var effect: AnimatedSprite2D
 var hit_targets: Dictionary = {}
+var chain_requested := false
 
 
 func _ready() -> void:
-	if body == null or movement == null or animation == null or sprite == null:
+	if body == null or movement == null or energy == null or animation == null or sprite == null:
 		push_error("%s is missing player references." % name)
 
 	if hitbox == null or hitbox_shape == null:
@@ -79,18 +84,19 @@ func _exit_tree() -> void:
 
 
 func start_aiming() -> void:
-	if body == null:
+	if body == null or energy == null or not energy.spend(energy_cost):
 		return
 
 	phase = Phase.AIMING
+	chain_requested = false
 	direction = _get_initial_direction()
 	body.velocity *= aim_entry_velocity_multiplier
 	previous_time_scale = Engine.time_scale
 	Engine.time_scale = aim_time_scale
 	animation.set_animation_override(animation_name, true)
-	_spawn_effect()
+	_spawn_effect(false)
 	if is_instance_valid(effect):
-		effect.modulate.a = 0.45
+		effect.modulate.a = aim_effect_alpha
 	update_visual_direction()
 
 
@@ -117,11 +123,24 @@ func finish() -> void:
 	_disable_hitbox()
 	_clear_effect()
 	animation.clear_animation_override()
+	chain_requested = false
 	phase = Phase.IDLE
 
 
 func is_finished() -> bool:
 	return phase == Phase.FINISHED
+
+
+func can_start() -> bool:
+	return energy != null and energy.can_spend(energy_cost)
+
+
+func wants_start() -> bool:
+	return Input.is_action_just_pressed(attack_action)
+
+
+func wants_chain() -> bool:
+	return chain_requested or Input.is_action_pressed(attack_action)
 
 
 func _update_aim() -> void:
@@ -152,16 +171,19 @@ func _get_initial_direction() -> Vector2:
 func _start_dash() -> void:
 	_restore_time_scale()
 	phase = Phase.DASHING
+	chain_requested = false
 	distance_traveled = 0.0
 	hit_targets.clear()
 	body.velocity = direction * dash_speed
 	_enable_hitbox()
-	if is_instance_valid(effect):
-		effect.modulate.a = 1.0
+	_play_effect()
 	dash_started.emit(direction)
 
 
 func _dash(delta: float) -> void:
+	if Input.is_action_just_pressed(attack_action):
+		chain_requested = true
+
 	body.velocity = direction * dash_speed
 	body.move_and_slide()
 	distance_traveled += dash_speed * delta
@@ -204,6 +226,10 @@ func _on_hitbox_entered(collider: Node) -> void:
 
 func _find_damage_target(node: Node) -> Node:
 	while node != null and node != get_tree().root:
+		var health := node.get_node_or_null("HealthComponent") as HealthComponent
+		if health != null:
+			return health
+
 		if (
 			node.has_method("take_damage")
 			or node.is_in_group(&"damageable")
@@ -216,7 +242,7 @@ func _find_damage_target(node: Node) -> Node:
 	return null
 
 
-func _spawn_effect() -> void:
+func _spawn_effect(play_animation := true) -> void:
 	if effect_scene == null:
 		return
 
@@ -227,8 +253,22 @@ func _spawn_effect() -> void:
 	body.add_child(effect)
 	effect.frame = 0
 	effect.frame_progress = 0.0
-	effect.play()
+	if play_animation:
+		effect.play()
+	else:
+		effect.stop()
 	update_visual_direction()
+
+
+func _play_effect() -> void:
+	if not is_instance_valid(effect):
+		_spawn_effect()
+		return
+
+	effect.frame = 0
+	effect.frame_progress = 0.0
+	effect.modulate.a = 1.0
+	effect.play()
 
 
 func update_visual_direction() -> void:

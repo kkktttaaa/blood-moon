@@ -44,5 +44,11 @@ func update_player(delta: float, can_jump := true) -> void:
 	if can_jump:
 		jump.physics_step(delta)
 
-	movement.physics_step(delta, movement.get_input_direction())
+	movement.physics_step(
+		delta,
+		movement.get_input_direction(),
+		1.0,
+		jump.get_gravity_multiplier(),
+		jump.get_fall_speed_multiplier()
+	)
 	animation.physics_step()

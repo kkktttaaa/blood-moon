@@ -1,50 +1,16 @@
 [gd_scene format=3 uid="uid://dxkmyqi5otr4b"]
 
 [ext_resource type="PackedScene" uid="uid://cqijc70pbijh1" path="res://Player/player.tscn" id="1_sot36"]
-[ext_resource type="Texture2D" uid="uid://6qqsu8x3ci3e" path="res://icon.svg" id="2_rwgxs"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_nnsk1"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_nnsk1"]
+[ext_resource type="Script" uid="uid://c8opma2xw83od" path="res://tools/screen_guides.gd" id="2_guides"]
+[ext_resource type="PackedScene" uid="uid://dxxwc6cnh1jwi" path="res://Tile/01.tscn" id="3_4wyf3"]
 
 [node name="world" type="Node2D" unique_id=1958504923]
 
+[node name="ScreenGuides" type="Node2D" parent="." unique_id=492768283]
+z_index = 100
+script = ExtResource("2_guides")
+
 [node name="Player" parent="." unique_id=1716926640 instance=ExtResource("1_sot36")]
-position = Vector2(192, 108)
+position = Vector2(161, 108)
 
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=1823555828 groups=["spin_target"]]
-position = Vector2(82, 119)
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=52339174]
-shape = SubResource("CircleShape2D_nnsk1")
-debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1854444651]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_rwgxs")
-
-[node name="Enemy2" type="CharacterBody2D" parent="." unique_id=809193208 groups=["spin_target"]]
-position = Vector2(185, 121)
-collision_layer = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2" unique_id=2067185095]
-shape = SubResource("CircleShape2D_nnsk1")
-debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy2" unique_id=224964196]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_rwgxs")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=1756187157]
-position = Vector2(192, 108)
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=1758328493]
-position = Vector2(10, 57.5)
-scale = Vector2(4.730547, 0.14917749)
-texture = ExtResource("2_rwgxs")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1730030350]
-position = Vector2(-6, 57)
-scale = Vector2(28.6, 1)
-shape = SubResource("RectangleShape2D_nnsk1")
+[node name="01" parent="." unique_id=1395167569 instance=ExtResource("3_4wyf3")]

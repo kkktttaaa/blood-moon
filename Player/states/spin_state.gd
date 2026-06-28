@@ -29,14 +29,14 @@ func physics_update(delta: float) -> void:
 		delta,
 		movement.get_input_direction(),
 		1.0,
-		spin.gravity_multiplier,
-		spin.max_fall_speed_multiplier
+		jump.get_gravity_multiplier(spin.gravity_multiplier),
+		jump.get_fall_speed_multiplier(spin.max_fall_speed_multiplier)
 	)
 	animation.physics_step()
 
 
 func get_next_state() -> StringName:
-	if attack.wants_attack():
+	if attack.wants_attack() and dash_slash.can_start():
 		return &"DashSlash"
 
 	if actor.is_on_floor():
