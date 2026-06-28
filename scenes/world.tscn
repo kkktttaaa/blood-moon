@@ -1,41 +1,16 @@
 [gd_scene format=3 uid="uid://dxkmyqi5otr4b"]
 
 [ext_resource type="PackedScene" uid="uid://cqijc70pbijh1" path="res://Player/player.tscn" id="1_sot36"]
-[ext_resource type="Texture2D" uid="uid://fpqiqhktdfib" path="res://Tile/tile.png" id="2_rwgxs"]
+[ext_resource type="Script" uid="uid://c8opma2xw83od" path="res://tools/screen_guides.gd" id="2_guides"]
 [ext_resource type="PackedScene" uid="uid://dxxwc6cnh1jwi" path="res://Tile/01.tscn" id="3_4wyf3"]
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwgxs"]
-size = Vector2(16, 16)
 
 [node name="world" type="Node2D" unique_id=1958504923]
 
+[node name="ScreenGuides" type="Node2D" parent="." unique_id=492768283]
+z_index = 100
+script = ExtResource("2_guides")
+
 [node name="Player" parent="." unique_id=1716926640 instance=ExtResource("1_sot36")]
 position = Vector2(161, 108)
-
-[node name="Enemy" type="CharacterBody2D" parent="." unique_id=1823555828 groups=["spin_target"]]
-position = Vector2(104, 104)
-collision_layer = 8
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy" unique_id=1854444651]
-texture = ExtResource("2_rwgxs")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy" unique_id=52339174]
-shape = SubResource("RectangleShape2D_rwgxs")
-debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
-
-[node name="Enemy2" type="CharacterBody2D" parent="." unique_id=1642635149 groups=["spin_target"]]
-position = Vector2(223, 104)
-collision_layer = 8
-
-[node name="Sprite2D" type="Sprite2D" parent="Enemy2" unique_id=863833198]
-texture = ExtResource("2_rwgxs")
-region_enabled = true
-region_rect = Rect2(0, 0, 16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Enemy2" unique_id=1280525855]
-shape = SubResource("RectangleShape2D_rwgxs")
-debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
 
 [node name="01" parent="." unique_id=1395167569 instance=ExtResource("3_4wyf3")]

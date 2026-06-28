@@ -1,0 +1,18 @@
+[gd_scene format=3 uid="uid://5lj43il08w8t"]
+
+[ext_resource type="Texture2D" uid="uid://fpqiqhktdfib" path="res://Tile/tile.png" id="1_7p1mj"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rwgxs"]
+size = Vector2(16, 16)
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1840181791 groups=["spin_target"]]
+collision_layer = 8
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1085730869]
+texture = ExtResource("1_7p1mj")
+region_enabled = true
+region_rect = Rect2(0, 0, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=14877549]
+shape = SubResource("RectangleShape2D_rwgxs")
+debug_color = Color(0.4647205, 0.5807495, 0.33816424, 0.41960785)
