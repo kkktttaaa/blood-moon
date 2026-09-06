@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://bph6ieakg8ce6"]
+
+[ext_resource type="Texture2D" uid="uid://dnqy4wt80txcp" path="res://Player/art/FX.png" id="1_eswav"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_04nep"]
+atlas = ExtResource("1_eswav")
+region = Rect2(0, 64, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_64yhj"]
+atlas = ExtResource("1_eswav")
+region = Rect2(48, 64, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vf2al"]
+atlas = ExtResource("1_eswav")
+region = Rect2(96, 64, 48, 48)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6fhxe"]
+atlas = ExtResource("1_eswav")
+region = Rect2(144, 64, 48, 48)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_fud06"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_04nep")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_64yhj")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vf2al")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6fhxe")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="spin_aura" type="AnimatedSprite2D" unique_id=1009164361]
+scale = Vector2(0.75, 0.75)
+sprite_frames = SubResource("SpriteFrames_fud06")
+frame = 3
+frame_progress = 0.6339952
+speed_scale = 3.5

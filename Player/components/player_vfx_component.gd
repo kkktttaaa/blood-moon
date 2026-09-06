@@ -5,6 +5,8 @@ class_name PlayerVFXComponent
 @export var jump_dust_scene: PackedScene
 @export var land_dust_scene: PackedScene
 @export var spin_effect_scene: PackedScene
+@export var spin_aura_scene: PackedScene
+var spin_aura: AnimatedSprite2D
 
 @export_group("References")
 @export var movement_path: NodePath = ^"../MovementComponent"
@@ -33,7 +35,7 @@ func _ready() -> void:
 	jump.jumped.connect(_on_jumped)
 	movement.landed.connect(_on_landed)
 	spin.started.connect(_on_spin_started)
-
+	spin.finished.connect(_on_spin_finished)
 
 func _on_jumped() -> void:
 	_spawn(jump_dust_scene, feet_marker)
@@ -45,7 +47,34 @@ func _on_landed() -> void:
 
 func _on_spin_started() -> void:
 	_spawn(spin_effect_scene, center_marker)
+	_start_spin_aura()
 
+func _start_spin_aura() -> void:
+	if spin_aura_scene == null:
+		return
+
+	if spin_aura != null:
+		return
+
+	spin_aura = spin_aura_scene.instantiate() as AnimatedSprite2D
+
+	if spin_aura == null:
+		return
+
+	body.add_child(spin_aura)
+
+	spin_aura.position = center_marker.position
+	spin_aura.play()
+
+func _on_spin_finished() -> void:
+	_stop_spin_aura()
+
+func _stop_spin_aura() -> void:
+	if spin_aura == null:
+		return
+
+	spin_aura.queue_free()
+	spin_aura = null
 
 func _spawn(scene: PackedScene, marker: Marker2D) -> void:
 	if scene == null or marker == null or body.get_parent() == null:
