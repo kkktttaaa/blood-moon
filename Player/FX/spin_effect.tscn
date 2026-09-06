@@ -26,3 +26,4 @@ animations = [{
 
 [node name="SpinEffect" type="AnimatedSprite2D" unique_id=1056945475]
 sprite_frames = SubResource("SpriteFrames_ip1vl")
+offset = Vector2(0, -10)

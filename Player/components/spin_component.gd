@@ -2,6 +2,7 @@ extends Node
 class_name SpinComponent
 
 signal started
+signal finished
 
 @export_group("Input")
 @export var spin_action := "jump"
@@ -103,3 +104,4 @@ func finish() -> void:
 	is_spinning = false
 	if animation != null:
 		animation.clear_animation_override()
+	finished.emit()

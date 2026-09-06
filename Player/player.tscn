@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://cu1mnbwjm08x8" path="res://Player/FX/spin_effect.tscn" id="14_spin"]
 [ext_resource type="Script" uid="uid://c0l2fi3tk3v6l" path="res://Player/components/dash_slash_component.gd" id="15_dash_component"]
 [ext_resource type="Script" uid="uid://bubyym8d0r6cr" path="res://Player/states/dash_slash_state.gd" id="16_dash_state"]
+[ext_resource type="PackedScene" uid="uid://bph6ieakg8ce6" path="res://Player/FX/spin_aura.tscn" id="17_8mwp6"]
 [ext_resource type="PackedScene" uid="uid://rcw4fxg3fcw7" path="res://Player/FX/slash_effect.tscn" id="17_slash_effect"]
 [ext_resource type="Script" uid="uid://beu53mc0y04f4" path="res://Player/components/dash_slash_vfx_component.gd" id="18_dash_vfx"]
 [ext_resource type="Script" uid="uid://drpkhneh5yv5p" path="res://Player/components/health_component.gd" id="19_health"]
@@ -258,6 +259,7 @@ radius = 12.0
 script = ExtResource("22_player")
 
 [node name="Sprite2D" type="Sprite2D" parent="." unique_id=1287096888]
+z_index = 1
 position = Vector2(0, -8)
 texture = SubResource("PortableCompressedTexture2D_4ntmi")
 hframes = 5
@@ -322,17 +324,15 @@ debug_color = Color(0.8104398, 0.3832928, 0.4104171, 0.41960785)
 [node name="VFXMarkers" type="Node2D" parent="." unique_id=1118215574]
 
 [node name="Feet" type="Marker2D" parent="VFXMarkers" unique_id=815783287]
-position = Vector2(0, -8)
 
 [node name="Center" type="Marker2D" parent="VFXMarkers" unique_id=1018421279]
-position = Vector2(0, -16)
+position = Vector2(0, -8)
 
 [node name="HealthComponent" type="Node" parent="." unique_id=51552671]
 script = ExtResource("19_health")
 
 [node name="EnergyComponent" type="Node" parent="." unique_id=1460539349]
 script = ExtResource("20_energy")
-max_energy = 1
 
 [node name="AnimationComponent" type="Node" parent="." unique_id=1511463340]
 script = ExtResource("3_vvrkv")
@@ -363,6 +363,7 @@ script = ExtResource("11_vfx")
 jump_dust_scene = ExtResource("12_jump")
 land_dust_scene = ExtResource("13_land")
 spin_effect_scene = ExtResource("14_spin")
+spin_aura_scene = ExtResource("17_8mwp6")
 
 [node name="StateMachine" type="Node" parent="." unique_id=283719538]
 script = ExtResource("4_i1pdm")
@@ -377,7 +378,7 @@ script = ExtResource("6_ld4ck")
 [node name="Attack" type="Node" parent="StateMachine" unique_id=64863739]
 script = ExtResource("8_7kqv0")
 speed_multiplier = 0.6
-air_gravity_multiplier = 0.6
+air_gravity_multiplier = 0.75
 
 [node name="Spin" type="Node" parent="StateMachine" unique_id=756482902]
 script = ExtResource("10_e8828")
