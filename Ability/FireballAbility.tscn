@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bdmfxbfvbskqi"]
+
+[ext_resource type="Script" uid="uid://b8ss50i22dyho" path="res://Ability/fireball_ability.gd" id="1_cfmrx"]
+
+[node name="FireballAbility" type="Node2D" unique_id=1704398936]
+script = ExtResource("1_cfmrx")

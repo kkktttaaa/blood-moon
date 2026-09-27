@@ -78,6 +78,9 @@ func get_fall_speed_multiplier(base_multiplier := 1.0) -> float:
 func cancel_buffer() -> void:
 	buffer_timer = 0.0
 
+func buffer_jump() -> void:
+	buffer_timer = jump_buffer_time
+
 
 func jump() -> void:
 	body.velocity.y = jump_velocity
