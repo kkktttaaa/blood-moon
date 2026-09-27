@@ -18,8 +18,10 @@
 [ext_resource type="Script" uid="uid://bubyym8d0r6cr" path="res://Player/states/dash_slash_state.gd" id="16_dash_state"]
 [ext_resource type="PackedScene" uid="uid://bph6ieakg8ce6" path="res://Player/FX/spin_aura.tscn" id="17_8mwp6"]
 [ext_resource type="PackedScene" uid="uid://rcw4fxg3fcw7" path="res://Player/FX/slash_effect.tscn" id="17_slash_effect"]
+[ext_resource type="Script" uid="uid://d34f8mac013c7" path="res://Player/components/ability_component.gd" id="18_8viyr"]
 [ext_resource type="Script" uid="uid://beu53mc0y04f4" path="res://Player/components/dash_slash_vfx_component.gd" id="18_dash_vfx"]
 [ext_resource type="Script" uid="uid://drpkhneh5yv5p" path="res://Player/components/health_component.gd" id="19_health"]
+[ext_resource type="PackedScene" uid="uid://cymv4mh6paqvc" path="res://UI/radiant_container.tscn" id="19_sm0op"]
 [ext_resource type="Script" uid="uid://dptjng5xop18b" path="res://Player/components/energy_component.gd" id="20_energy"]
 [ext_resource type="Script" uid="uid://dn82sslbeck4i" path="res://Player/ui/player_hud.gd" id="21_hud"]
 [ext_resource type="Script" uid="uid://c04q336ns5fa4" path="res://Player/player.gd" id="22_player"]
@@ -253,7 +255,7 @@ _data = {
 size = Vector2(16, 14)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_x3vf3"]
-radius = 12.0
+radius = 14.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1624974940]
 script = ExtResource("22_player")
@@ -364,6 +366,14 @@ jump_dust_scene = ExtResource("12_jump")
 land_dust_scene = ExtResource("13_land")
 spin_effect_scene = ExtResource("14_spin")
 spin_aura_scene = ExtResource("17_8mwp6")
+
+[node name="AbilityComponent" type="Node" parent="." unique_id=968212811]
+script = ExtResource("18_8viyr")
+metadata/_custom_type_script = "uid://d34f8mac013c7"
+
+[node name="RadiantContainer" parent="." unique_id=817768063 instance=ExtResource("19_sm0op")]
+offset_top = -8.0
+offset_bottom = -8.0
 
 [node name="StateMachine" type="Node" parent="." unique_id=283719538]
 script = ExtResource("4_i1pdm")

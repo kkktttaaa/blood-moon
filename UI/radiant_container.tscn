@@ -1,0 +1,44 @@
+[gd_scene format=3 uid="uid://cymv4mh6paqvc"]
+
+[ext_resource type="Script" uid="uid://chhar1qgnblcg" path="res://UI/scripts/radiant_container.gd" id="1_w8gye"]
+[ext_resource type="PackedScene" uid="uid://dytr4ubrmmlpm" path="res://UI/item_container.tscn" id="2_ln2q7"]
+[ext_resource type="PackedScene" uid="uid://bdmfxbfvbskqi" path="res://Ability/FireballAbility.tscn" id="3_4s47h"]
+[ext_resource type="Texture2D" uid="uid://6qqsu8x3ci3e" path="res://icon.svg" id="3_ic8qu"]
+
+[node name="RadiantContainer" type="Control" unique_id=817768063]
+z_index = 5
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_w8gye")
+radius = 35.0
+
+[node name="ItemContainer" parent="." unique_id=1062256705 instance=ExtResource("2_ln2q7")]
+layout_mode = 0
+offset_left = -8.000002
+offset_top = -43.0
+offset_right = 7.999998
+offset_bottom = -27.0
+ability_scene = ExtResource("3_4s47h")
+icon = ExtResource("3_ic8qu")
+
+[node name="ItemContainer2" parent="." unique_id=191842700 instance=ExtResource("2_ln2q7")]
+layout_mode = 0
+offset_left = 22.310888
+offset_top = 9.5
+offset_right = 38.31089
+offset_bottom = 25.5
+ability_scene = ExtResource("3_4s47h")
+icon = ExtResource("3_ic8qu")
+
+[node name="ItemContainer3" parent="." unique_id=1182845236 instance=ExtResource("2_ln2q7")]
+layout_mode = 0
+offset_left = -38.31089
+offset_top = 9.500002
+offset_right = -22.31089
+offset_bottom = 25.500002
+ability_scene = ExtResource("3_4s47h")
+icon = ExtResource("3_ic8qu")

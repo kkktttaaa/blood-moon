@@ -43,4 +43,4 @@ scale = Vector2(0.75, 0.75)
 sprite_frames = SubResource("SpriteFrames_fud06")
 frame = 3
 frame_progress = 0.6339952
-speed_scale = 3.5
+speed_scale = 4.0
